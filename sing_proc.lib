@@ -262,6 +262,20 @@ proc get_index(ideal J, poly f)
 			return(i);
 		}
 	}
+	return(-1);
+}
+
+proc get_index_str(ideal J, string f)
+{
+	int i;
+	for(i=1;i<=size(J); i++)
+	{
+		if(string(lead(J[i])) == f)
+		{
+			return(i);
+		}
+	}
+	return(-1);
 }
 
 //Author of return_primary_var_ideals: Vikas
@@ -294,6 +308,35 @@ proc elm_PI(ideal g, int num)
     return(solution);
 }
 
+//Author of return_primary_var_ideals: Vikas
+proc elm_PI_list(ideal g, ideal PI)
+{
+	list L = ringlist(R);
+	int i;
+	int j;
+    int nu = size(L[2]);
+    int nidx = nu-size(PI)+1;
+    ideal searching;
+    ideal solution;
+    list idxmatch;
+    for(i=1;i<=size(g);i=i+1)
+    {	
+    	searching = variables(g[i]);
+    	idxmatch  = var2index(searching);
+    	for(j=1;j<=size(idxmatch);j=j+1)
+    	{	
+    		if(idxmatch[j]<nidx)
+    		{
+    			break;
+    		}
+    	}
+    	if (j > size(idxmatch))
+    	{
+    		solution = solution + g[i];
+    	} 
+    }
+    return(solution);
+}
 
 proc id2poly(ideal J)
 {
