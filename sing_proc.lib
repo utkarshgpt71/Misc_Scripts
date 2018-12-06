@@ -1,3 +1,4 @@
+LIB "rootsur.lib";
 LIB "crypto.lib";
 LIB "normaliz.lib";
 LIB "ring.lib";
@@ -285,7 +286,7 @@ proc elm_PI(ideal g, int num)
 	int i;
 	int j;
     int nu = size(L[2]);
-    int nidx = nu-2*num+1;
+    int nidx = nu-num+1;
     ideal searching;
     ideal solution;
     list idxmatch;
@@ -337,6 +338,32 @@ proc elm_PI_list(ideal g, ideal PI)
     }
     return(solution);
 }
+
+proc id_lower(ideal I, int ind)
+{
+	intvec sv = sortvec(I);
+	int sv_ind = find_iv_index(sv, ind);
+	ideal lw;
+	for(int i=1; i <sv_ind; i++)
+	{
+		lw = lw + I[sv[i]];
+	}
+	return(lw);
+
+}
+
+proc find_iv_index(intvec iv, int n)
+{
+	for(int i=1; i <= size(iv); i++)
+	{
+		if(iv[i] == n)
+		{
+			return(i); 
+		}
+	}
+	return(0);
+}
+
 
 proc id2poly(ideal J)
 {
