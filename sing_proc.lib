@@ -31,6 +31,30 @@ proc inter_JS(ideal g_JA, ideal J0C, ideal XA)
 //////////////////////////////////////////////////////////////
 
 
+// converts a string to polynomial if it is legal
+proc str2poly(string s)
+{
+	execute("poly f_str2poly = "+s+";");
+	return(f_str2poly);
+}
+
+// converts a list of strings each representing legal poly to list actual polys
+proc strlist2polylist(list L)
+{
+	list pL;
+	for(int i = 1; i<=size(L); i++)
+	{	
+		pL[i] = str2poly(L[i]);
+	}
+	return(pL);
+}
+
+//returns an  ideal of vanishsing polys from a list of str variables
+proc listofstrvar2van_id(list L)
+{
+	return(van_id(strlist2polylist(L)));
+}
+
 // Compute vanishing polynomials for a list of variables
 proc van_id(list X)
 {
