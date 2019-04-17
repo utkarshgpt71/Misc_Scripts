@@ -1,0 +1,27 @@
+The python script bits_in_W.py finds bit-level variables
+in terms of the the word-level variable for the given 
+representation:
+
+W = m0 + m_1*x + m_2*x^2 + ... + m_{n-1}*x^{n-1}
+
+where x is the primitive element of the field
+F_{2^n} and the primitive polynomial selected from 
+bprimitive file.
+
+The output is stored as comma separated word-level 
+representaions of m_0, m_1, ..., m_{k-1} in a 
+file Computed_Lists/bits_in_W_n_k.list,
+where n and k are provided as input arguments to the 
+python script as follows:
+
+python bits_in_W.py n k
+
+n: n denotes the field F_{2^n}
+k: k-1 is the last bit for which word-level
+   representation is computed starting from 
+   m_0, m_1, ..., m_{k-1}
+
+Notes:
+1. The following asseration should not fail:
+					k <= n
+

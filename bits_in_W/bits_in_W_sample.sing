@@ -1,0 +1,35 @@
+ring R = (2,x), (W), lp;
+
+minpoly = x^3+x^1+1;
+
+int bw = 3;
+int i,j;
+matrix A[bw][bw];
+
+for(i=1;i<=bw;i++)
+{
+  for(j=1;j<=bw;j++)
+  {
+    A[i,j] = x ^ ( (2^(i-1)) * (j-1)); 
+  }
+}
+
+matrix B[bw][1];
+
+for(i=1;i<=bw;i++)
+{
+  B[i,1] = W^(2^(i-1));
+}
+
+matrix tmp[bw][bw];
+list L;
+
+for(i=1;i<=bw;i++)
+{
+  tmp = A;
+  tmp[1..bw,i] = B;
+  L[i] = det(tmp);
+}
+
+string s = "Computed_Lists/bits_in_W_" + string(bw) +".list";
+write(":w "+s,L);
